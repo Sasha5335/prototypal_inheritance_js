@@ -5,6 +5,7 @@ function MyArrayProto() {
 		for (let i = 0; i < arguments.length; i++) {
 			this[this.length++] = arguments[i];
 		}
+
 		return this.length;
 	};
 
@@ -15,6 +16,7 @@ function MyArrayProto() {
 		}
 		const lastItem = this[this.length - 1];
 		delete this[--this.length];
+
 		return lastItem;
 	};
 
@@ -49,7 +51,33 @@ function MyArrayProto() {
 			this[i] = arrArguments[i];
 		}
 		delete this[--this.length];
+
 		return firstItem;
+	};
+
+
+	this.concat = function concat() {
+		const arrConcat = [];
+		for (let i = 0; i < this.length; i++) {
+			arrConcat.push(this[i]);
+		}
+		for (let i = 0; i < arguments.length; i++) {
+			arrConcat.push(arguments[i]);
+		}
+		return arrConcat;
+	};
+
+
+	this.revers = function () {
+		const arrRevers = [];
+		for (let i = this.length - 1; i >= 0; i--) {
+			arrRevers.push(this[i]);
+		}
+		for (let i = 0; i < arrRevers.length; i++) {
+			this[i] = arrRevers[i];
+		}
+
+		return this;
 	};
 
 
@@ -66,6 +94,7 @@ function MyArrayProto() {
 				return true;
 			}
 		}
+
 		return false;
 	};
 
@@ -76,6 +105,7 @@ function MyArrayProto() {
 				return false;
 			}
 		}
+
 		return true;
 	};
 
@@ -87,6 +117,7 @@ function MyArrayProto() {
 				result.push(this[i]);
 			}
 		}
+
 		return result;
 	};
 
