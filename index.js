@@ -1,11 +1,13 @@
 'use strict'
 
+
+
+
 function MyArrayProto() {
 	this.push = function push() {
 		for (let i = 0; i < arguments.length; i++) {
 			this[this.length++] = arguments[i];
 		}
-
 		return this.length;
 	};
 
@@ -16,7 +18,6 @@ function MyArrayProto() {
 		}
 		const lastItem = this[this.length - 1];
 		delete this[--this.length];
-
 		return lastItem;
 	};
 
@@ -32,7 +33,6 @@ function MyArrayProto() {
 		for (let i = 0; i < arrArguments.length; i++) {
 			this[i] = arrArguments[i];
 		}
-
 		return this.length = arrArguments.length;
 	};
 
@@ -51,13 +51,12 @@ function MyArrayProto() {
 			this[i] = arrArguments[i];
 		}
 		delete this[--this.length];
-
 		return firstItem;
 	};
 
 
 	this.concat = function concat() {
-		const arrConcat = [];
+		const arrConcat = new MyArray();
 		for (let i = 0; i < this.length; i++) {
 			arrConcat.push(this[i]);
 		}
@@ -76,15 +75,23 @@ function MyArrayProto() {
 		for (let i = 0; i < arrRevers.length; i++) {
 			this[i] = arrRevers[i];
 		}
-
 		return this;
 	};
 
 
 	this.forEach = function forEach(func) {
 		for (let i = 0; i < this.length; i++) {
-			func(this[i], i, this);
+			func(this[i]);
 		}
+	};
+
+
+	this.map = function map(func) {
+		const arrMap = new MyArray();
+		for (let i = 0; i < this.length; i++) {
+			arrMap.push(func(this[i], i, this))
+		}
+		return arrMap;
 	};
 
 
@@ -94,7 +101,6 @@ function MyArrayProto() {
 				return true;
 			}
 		}
-
 		return false;
 	};
 
@@ -105,7 +111,6 @@ function MyArrayProto() {
 				return false;
 			}
 		}
-
 		return true;
 	};
 
@@ -117,11 +122,8 @@ function MyArrayProto() {
 				result.push(this[i]);
 			}
 		}
-
 		return result;
 	};
-
-
 }
 
 
@@ -139,3 +141,7 @@ function MyArray(...args) {
 MyArray.prototype = new MyArrayProto();
 
 const myArr = new MyArray(1, 2, 2, 9, 8);
+
+
+
+
