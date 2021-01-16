@@ -1,126 +1,127 @@
 'use strict'
 
 class MyArray {
-	constructor() {
-		this.length = 0;
+   constructor() {
+      this.length = 0;
 
-		for (let i = 0; i < arguments.length; i++) {
-			this.push(arguments[i]);
-		}
-	}
+      for (let i = 0; i < arguments.length; i++) {
+         this.push(arguments[i]);
+      }
 
-	push() {
-		for (let i = 0; i < arguments.length; i++) {
-			this[this.length++] = arguments[i];
-		}
-		return this.length;
-	}
+   }
 
-	pop() {
-		if (this.length === 0) {
-			return;
-		}
-		const lastItem = this[this.length - 1];
-		delete this[--this.length];
-		return lastItem;
-	}
+   push() {
+      for (let i = 0; i < arguments.length; i++) {
+         this[this.length++] = arguments[i];
+      }
+      return this.length;
+   }
 
-	unsift() {
-		const arrArguments = [];
-		for (let i = 0; i < arguments.length; i++) {
-			arrArguments.push(arguments[i]);
-		}
-		for (let i = 0; i < this.length; i++) {
-			arrArguments.push(this[i]);
-		}
-		for (let i = 0; i < arrArguments.length; i++) {
-			this[i] = arrArguments[i];
-		}
-		return this.length = arrArguments.length;
-	}
+   pop() {
+      if (this.length === 0) {
+         return;
+      }
+      const lastItem = this[this.length - 1];
+      delete this[--this.length];
+      return lastItem;
+   }
 
-	shift() {
-		const arrArguments = [];
-		const firstItem = this[0];
+   unsift() {
+      const arrArguments = [];
+      for (let i = 0; i < arguments.length; i++) {
+         arrArguments.push(arguments[i]);
+      }
+      for (let i = 0; i < this.length; i++) {
+         arrArguments.push(this[i]);
+      }
+      for (let i = 0; i < arrArguments.length; i++) {
+         this[i] = arrArguments[i];
+      }
+      return this.length = arrArguments.length;
+   }
 
-		if (this.length === 0) {
-			return;
-		}
-		for (let i = 1; i < this.length; i++) {
-			arrArguments.push(this[i]);
-		}
-		for (let i = 0; i < arrArguments.length; i++) {
-			this[i] = arrArguments[i];
-		}
-		delete this[--this.length];
-		return firstItem;
-	}
+   shift() {
+      const arrArguments = [];
+      const firstItem = this[0];
 
-	concat() {
-		const arrConcat = new MyArray();
-		for (let i = 0; i < this.length; i++) {
-			arrConcat.push(this[i]);
-		}
-		for (let i = 0; i < arguments.length; i++) {
-			arrConcat.push(arguments[i]);
-		}
-		return arrConcat;
-	}
+      if (this.length === 0) {
+         return;
+      }
+      for (let i = 1; i < this.length; i++) {
+         arrArguments.push(this[i]);
+      }
+      for (let i = 0; i < arrArguments.length; i++) {
+         this[i] = arrArguments[i];
+      }
+      delete this[--this.length];
+      return firstItem;
+   }
 
-	revers() {
-		const arrRevers = [];
-		for (let i = this.length - 1; i >= 0; i--) {
-			arrRevers.push(this[i]);
-		}
-		for (let i = 0; i < arrRevers.length; i++) {
-			this[i] = arrRevers[i];
-		}
-		return this;
-	}
+   concat() {
+      const arrConcat = new MyArray();
+      for (let i = 0; i < this.length; i++) {
+         arrConcat.push(this[i]);
+      }
+      for (let i = 0; i < arguments.length; i++) {
+         arrConcat.push(arguments[i]);
+      }
+      return arrConcat;
+   }
 
-	forEach(func) {
-		for (let i = 0; i < this.length; i++) {
-			func(this[i]);
-		}
-	}
+   revers() {
+      const arrRevers = [];
+      for (let i = this.length - 1; i >= 0; i--) {
+         arrRevers.push(this[i]);
+      }
+      for (let i = 0; i < arrRevers.length; i++) {
+         this[i] = arrRevers[i];
+      }
+      return this;
+   }
 
-	map(func) {
-		const arrMap = new MyArray();
-		for (let i = 0; i < this.length; i++) {
-			arrMap.push(func(this[i], i, this));
-		}
-		return arrMap;
-	}
+   forEach(func) {
+      for (let i = 0; i < this.length; i++) {
+         func(this[i]);
+      }
+   }
 
-	some(func) {
-		for (let i = 0; i < this.length; i++) {
-			if (func(this[i], i, this)) {
-				return true;
-			}
-		}
-		return false;
-	}
+   map(func) {
+      const arrMap = new MyArray();
+      for (let i = 0; i < this.length; i++) {
+         arrMap.push(func(this[i], i, this));
+      }
+      return arrMap;
+   }
 
-	every(func) {
-		for (let i = 0; i < this.length; i++) {
-			if (!func(this[i], i, this)) {
-				return false;
-			}
-		}
-		return true;
-	}
+   some(func) {
+      for (let i = 0; i < this.length; i++) {
+         if (func(this[i], i, this)) {
+            return true;
+         }
+      }
+      return false;
+   }
 
-	filter(checkFunction) {
-		const result = new MyArray();
-		for (let i = 0; i < this.length; i++) {
-			if (checkFunction(this[i], i, this)) {
-				result.push(this[i]);
-			}
-		}
-		return result;
-	}
+   every(func) {
+      for (let i = 0; i < this.length; i++) {
+         if (!func(this[i], i, this)) {
+            return false;
+         }
+      }
+      return true;
+   }
 
-	static isMyArray(obj) {
-		return obj instanceof MyArray;
-	}
+   filter(checkFunction) {
+      const result = new MyArray();
+      for (let i = 0; i < this.length; i++) {
+         if (checkFunction(this[i], i, this)) {
+            result.push(this[i]);
+         }
+      }
+      return result;
+   }
+
+   static isMyArray(obj) {
+      return obj instanceof MyArray;
+   }
 }
