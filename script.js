@@ -1,25 +1,31 @@
-'use strict';
+'use strict'
 
-function MyArrayProto() {
-	this.push = function push() {
+class MyArray {
+	constructor() {
+		this.length = 0;
+
+		for (let i = 0; i < arguments.length; i++) {
+			this.push(arguments[i]);
+		}
+	}
+
+	push() {
 		for (let i = 0; i < arguments.length; i++) {
 			this[this.length++] = arguments[i];
 		}
 		return this.length;
-	};
+	}
 
-
-	this.pop = function () {
+	pop() {
 		if (this.length === 0) {
 			return;
 		}
 		const lastItem = this[this.length - 1];
 		delete this[--this.length];
 		return lastItem;
-	};
+	}
 
-
-	this.unshift = function unsift() {
+	unsift() {
 		const arrArguments = [];
 		for (let i = 0; i < arguments.length; i++) {
 			arrArguments.push(arguments[i]);
@@ -31,10 +37,9 @@ function MyArrayProto() {
 			this[i] = arrArguments[i];
 		}
 		return this.length = arrArguments.length;
-	};
+	}
 
-
-	this.shift = function shift() {
+	shift() {
 		const arrArguments = [];
 		const firstItem = this[0];
 
@@ -49,10 +54,9 @@ function MyArrayProto() {
 		}
 		delete this[--this.length];
 		return firstItem;
-	};
+	}
 
-
-	this.concat = function concat() {
+	concat() {
 		const arrConcat = new MyArray();
 		for (let i = 0; i < this.length; i++) {
 			arrConcat.push(this[i]);
@@ -61,10 +65,9 @@ function MyArrayProto() {
 			arrConcat.push(arguments[i]);
 		}
 		return arrConcat;
-	};
+	}
 
-
-	this.revers = function () {
+	revers() {
 		const arrRevers = [];
 		for (let i = this.length - 1; i >= 0; i--) {
 			arrRevers.push(this[i]);
@@ -73,46 +76,41 @@ function MyArrayProto() {
 			this[i] = arrRevers[i];
 		}
 		return this;
-	};
+	}
 
-
-	this.forEach = function forEach(func) {
+	forEach(func) {
 		for (let i = 0; i < this.length; i++) {
 			func(this[i]);
 		}
-	};
+	}
 
-
-	this.map = function map(func) {
+	map(func) {
 		const arrMap = new MyArray();
 		for (let i = 0; i < this.length; i++) {
 			arrMap.push(func(this[i], i, this));
 		}
 		return arrMap;
-	};
+	}
 
-
-	this.some = function some(func) {
+	some(func) {
 		for (let i = 0; i < this.length; i++) {
 			if (func(this[i], i, this)) {
 				return true;
 			}
 		}
 		return false;
-	};
+	}
 
-
-	this.every = function every(func) {
+	every(func) {
 		for (let i = 0; i < this.length; i++) {
 			if (!func(this[i], i, this)) {
 				return false;
 			}
 		}
 		return true;
-	};
+	}
 
-
-	this.filter = function filter(checkFunction) {
+	filter(checkFunction) {
 		const result = new MyArray();
 		for (let i = 0; i < this.length; i++) {
 			if (checkFunction(this[i], i, this)) {
@@ -120,25 +118,9 @@ function MyArrayProto() {
 			}
 		}
 		return result;
-	};
-}
+	}
 
-
-/* Объекты с данными */
-function MyArray(...args) {
-	this.length = 0;
-
-	for (let i = 0; i < arguments.length; i++) {
-		this.push(arguments[i]);
+	static isMyArray(obj) {
+		return obj instanceof MyArray;
 	}
 }
-
-
-/* Создаём прототип(связь между объектами). Наследование */
-MyArray.prototype = new MyArrayProto();
-
-const myArr = new MyArray(1, 2, 2, 9, 8);
-
-
-
-
